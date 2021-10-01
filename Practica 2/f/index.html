@@ -1,0 +1,243 @@
+<html>
+    <head>
+        <title>REDES2</title>
+    </head>
+    <body >
+        <div class="card-body" align="center">
+            <h1 class="card-title">Practica 2 Redes 2</h1>
+            <h3 class="card-title">Grupo 15</h6>
+            <table style="width: 780px;" align="center" border="2">
+                <tr>
+                    <td>
+                        <p>Nombre</p>                         
+                    </td>
+                    <td>
+                        <p>Carnet</p>                         
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <p class="card-text">Steven Aaron Sis Hernandez</p>
+                    </td>
+                    <td>
+                        <p> 201706357</p>                         
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <p class="card-text">Jesus Alejandro Mansilla Villatoro </p>
+                    </td>
+                    <td>
+                        <p> 201709396</p>                         
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <p class="card-text">Miguel Solis Solis Yantuche </p>
+                    </td>
+                    <td>
+                        <p> 201700543</p>                         
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <p class="card-text">Eli Samuel Mazariegos Ramirez </p>
+                    </td>
+                    <td>
+                        <p> 201709426</p>                         
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br><hr><hr><br>
+        <div>
+          <table align="center">
+              <tr>
+                <td>
+                    <p>Titulo: <input type="text" id="titulo" size="20"></p>
+                </td>
+                <td>
+                    <p>Autor: <input type="text" id="autor" size="20"></p>  
+                </td>        
+                <td>
+                    <p>Descripcion: <input type="text" id="descripcion" size="20"></p>
+                </td>
+                <td>
+                    <input type="submit" value="Agregar Libro" onclick="agregar_libro()">
+                </td>
+            </tr>
+        </table>  
+        <br>
+        </div>
+        <table style="width: 780px;" align="center" border="2">
+            <thead>
+                <tr>
+                    <td ><strong>Id_Libro</strong></td>
+                    <td ><strong>Titulo</strong></td>
+                    <td ><strong>Autor</strong></td>
+                </tr>
+            </thead>
+            <tbody id="body">
+            
+            </tbody>
+        </table>
+        <br><hr><hr><br>
+        <table align="center">
+            <tr>
+              <td>
+                  <p>Vendedor: 
+                    <select id="vendedor" style="width: 280px;" >
+                     <option>Vendedores</option>   
+                    </select>      
+              </td>
+              <td>
+                <p>Libros: 
+                    <select id="libros" style="width: 280px;">
+                     <option>Libros</option>   
+                    </select>      
+              </td>        
+              <td>
+                  <input type="submit" value="Agregar Venta" onclick="addVenta()">
+              </td>
+          </tr>
+      </table>
+        <br>
+        <table style="width: 780px;" align="center" border="2">
+            <thead>
+                <tr>
+                    <td ><strong>Usuario</strong></td>
+                    <td ><strong>Libro</strong></td>
+                    <td ><strong>Fecha</strong></td>
+                    
+                </tr>
+            </thead>
+            <tbody id="crearVenta">
+            
+            </tbody>
+        </table>
+        <br><hr><hr><br>
+        
+        <script>
+            get();
+            /*getVentas();
+            getUsers();*/
+            async function postData(url) {
+                const response = await fetch(url, {
+                    method: 'POST', 
+                    mode: 'cors', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                return response.json();
+            }
+            
+            async function agregar(url, data) {
+                const response = await fetch(url, {
+                    method: 'POST', 
+                    mode: 'cors', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                location.reload()
+                return response.json();
+            }
+            
+            function agregar_libro(){
+                var titulo = document.getElementById('titulo').value;
+                var autor = document.getElementById('autor').value;
+                var descripcion = document.getElementById('descripcion').value  ;
+                agregar('http://localhost:3000/crearLibro', {"titulo":titulo, "autor":autor, "descripcion":descripcion})
+            }
+
+            function get(){
+                /*var body = document.getElementById('body');
+                var select = document.getElementsByName('libros');*/
+                postData('http://balancer:4000/getReportes')
+                .then(data => {
+                    console.log(data);
+                    /*for(let i=0;  i<data.length; i++){
+                        var tr=document.createElement('tr');
+                        var td1=document.createElement('td');
+                        td1.style.textAlign="center";
+                        
+
+                        var td2=document.createElement('td');
+                        td2.style.textAlign="center";
+                        
+                        var td3=document.createElement('td');
+                        td3.style.textAlign="center";
+                        
+                        td1.innerHTML=data[i].codigo_libro;
+                        td2.innerHTML=data[i].titulo;
+                        td3.innerHTML=data[i].autor;
+                        
+                        
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        tr.appendChild(td3);
+
+                        body.appendChild(tr);
+                        document.getElementById("libros").innerHTML += "<option value='"+data[i].codigo_libro+"'>"+data[i].titulo+"</option>";    
+                        
+                    }*/
+                });
+            }
+            function getVentas(){
+                var body=document.getElementById('crearVenta');
+
+                postData('http://localhost:3000/verVenta')
+                .then(data => {
+                    console.log(data.length);
+                    for(let i=0;  i<data.length; i++){
+                        var tr=document.createElement('tr');
+                        var td1=document.createElement('td');
+                        td1.style.textAlign="center";
+                        
+
+                        var td2=document.createElement('td');
+                        td2.style.textAlign="center";
+                        
+                        var td3=document.createElement('td');
+                        td3.style.textAlign="center";
+                        
+                        td1.innerHTML=data[i].vendedor;
+                        td2.innerHTML=data[i].libro;
+                        td3.innerHTML=data[i].fecha;
+                        
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+                        tr.appendChild(td3);
+
+                        body.appendChild(tr);
+                    }
+                });
+            }
+
+            function getUsers(){
+
+                postData('http://localhost:3000/verUsuarios')
+                .then(data => {
+                    console.log(data.length);
+                    for(let i=0;  i<data.length; i++){
+                        document.getElementById("vendedor").innerHTML += 
+                        "<option value='"+data[i].codigo_usuario+"'>"+data[i].nombre +"</option>";    
+
+                    }
+                });
+            }
+            function addVenta(){
+                var vendedor = document.getElementById("vendedor").value;
+                var libro = document.getElementById('libros').value;
+                agregar('http://localhost:3000/crearVenta', {"libro":libro, "usuario":vendedor})
+           
+            }
+        </script>
+    </body>
+</html>

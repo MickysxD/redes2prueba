@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h4 class="modal-title">Reporte</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <form readonly>
+                <fieldset [disabled]="this.report != ''">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12">
+                            <label for="id">Carnet</label>
+                            <input class="form-control" id="id" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.id" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12">
+                            <label for="name">Nombre</label>
+                            <input class="form-control" id="name" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.name" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12">
+                            <label for="course">Curso/Proyecto</label>
+                            <input class="form-control" id="course" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.course" />
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="this.report != ''">
+                        <div class="col-sm-6  col-md-12">
+                            <label for="date">Fecha de Creacion</label>
+                            <input class="form-control" id="date" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.date" />
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="this.report != ''">
+                        <div class="col-sm-6  col-md-12">
+                            <label for="user">Procesado Por</label>
+                            <input class="form-control" id="user" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.user" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12">
+                            <label for="description">Descripcion</label>
+                            <textarea class="form-control" id="description" [ngModelOptions]="{standalone: true}"
+                                [(ngModel)]="this.description"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <p> SOLICITUD ATENDIDA POR EL SERVIDORS: {{server_name}}</p>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div  *ngIf="this.report == ''">
+        <button class="btn btn-success" id="add_button" (click)="addReport()">Crear</button>
+    </div>
+    <button class="btn btn-danger" (click)="activeModal.dismiss('')">
+        Cerrar
+    </button>
+</div>

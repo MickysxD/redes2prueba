@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand"> <img src="https://cdn4.iconfinder.com/data/icons/education-3-22/66/130-512.png" width="30"
+        height="30" alt="">&nbsp; Net2 Reports</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <button class="btn btn-success float-right" (click)="add_report()"><i class="fas fa-plus"></i> Nuevo
+              Reporte</button>
+            <h4 class="card-title"><i class="fas fa-list"></i> Panel Central</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <input id="search" class="form-control"  [ngModelOptions]="{standalone: true}" [(ngModel)]="this.searchID">
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <button class="btn btn-info" (click)="search_report()"><i class="fas fa-search" ></i> Buscar</button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-hover">
+                  <thead class="thead-dark">
+                    <tr>
+                      <td scope="col" class="text-center"><i class="fas fa-cogs" ></i> </td>
+                      <td scope="col">Carnet</td>
+                      <td scope="col">Nombre</td>
+                      <td scope="col">Curso</td>
+                      <td scope="col">Descripcion</td>
+                      <td scope="col">Fecha</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of this.data" scope="row">
+                      <td style="width: 10%;" class="text-center"><a href="javascript:void(0);" (click)="get_report(item.id_reporte)">Ver Reporte</a></td>
+                      <td>{{item.carnet}}</td>
+                      <td>{{item.nombre}}</td>
+                      <td>{{item.curso}}</td>
+                      <td>{{item.cuerpo}}</td>
+                      <td>{{item.fecha}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <p>SOLICITUD ATENDIDA POR EL SERVIDORS: {{server_name}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

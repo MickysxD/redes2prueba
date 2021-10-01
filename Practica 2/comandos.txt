@@ -1,0 +1,5 @@
+#Hacer imagenes con dockerfile
+docker build nombre .
+
+#Correr docker compose
+docker-compose up
