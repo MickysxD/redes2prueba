@@ -47,7 +47,39 @@ services:
       - /proc:/usr/src/app/lecturas
     environment:
     - IP_DB=database
-    - SERVER_NAME=2017
+    - SERVER_NAME=201706357
+
+  backend3:
+    container_name: api4
+    build: ./backend
+    restart: always
+    ports:
+      #- "3000:3000"
+      - "3000"
+    networks:
+      - service_network
+      - db_network
+    volumes:
+      - /proc:/usr/src/app/lecturas
+    environment:
+    - IP_DB=database
+    - SERVER_NAME=201709396
+
+  backend4:
+    container_name: api4
+    build: ./backend
+    restart: always
+    ports:
+      #- "3000:3000"
+      - "3000"
+    networks:
+      - service_network
+      - db_network
+    volumes:
+      - /proc:/usr/src/app/lecturas
+    environment:
+    - IP_DB=database
+    - SERVER_NAME=201700831
 
   balancer:
     container_name: apibalancer
