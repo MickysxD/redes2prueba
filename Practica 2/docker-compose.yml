@@ -1,4 +1,4 @@
-version: '3.3'
+version: '2.0'
 
 services:
   frontend:
@@ -50,7 +50,7 @@ services:
     - SERVER_NAME=201706357
 
   backend3:
-    container_name: api4
+    container_name: api3
     build: ./backend
     restart: always
     ports:
